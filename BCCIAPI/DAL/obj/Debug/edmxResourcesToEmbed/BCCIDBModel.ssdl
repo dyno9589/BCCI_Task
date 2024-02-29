@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BCCIDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BcciSeries">
+    <Key>
+      <PropertyRef Name="MatchId" />
+    </Key>
+    <Property Name="MatchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MatchName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Team1" Type="nvarchar" MaxLength="100" />
+    <Property Name="Team2" Type="nvarchar" MaxLength="100" />
+    <Property Name="MatchDate" Type="date" />
+    <Property Name="Venue" Type="nvarchar" MaxLength="100" />
+    <Property Name="SeriesId" Type="int" />
+    <Property Name="SeriesName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SeriesStartDate" Type="date" />
+    <Property Name="SeriesEndDate" Type="date" />
+  </EntityType>
+  <Association Name="FK__BcciSerie__Serie__403A8C7D">
+    <End Role="BcciSeries" Type="Self.BcciSeries" Multiplicity="0..1" />
+    <End Role="BcciSeries1" Type="Self.BcciSeries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BcciSeries">
+        <PropertyRef Name="MatchId" />
+      </Principal>
+      <Dependent Role="BcciSeries1">
+        <PropertyRef Name="SeriesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BCCIDBModelStoreContainer">
+    <EntitySet Name="BcciSeries" EntityType="Self.BcciSeries" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BcciSerie__Serie__403A8C7D" Association="Self.FK__BcciSerie__Serie__403A8C7D">
+      <End Role="BcciSeries" EntitySet="BcciSeries" />
+      <End Role="BcciSeries1" EntitySet="BcciSeries" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

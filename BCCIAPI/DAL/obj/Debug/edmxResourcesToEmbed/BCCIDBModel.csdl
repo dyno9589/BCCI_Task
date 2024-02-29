@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BCCIDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BcciSery">
+    <Key>
+      <PropertyRef Name="MatchId" />
+    </Key>
+    <Property Name="MatchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MatchName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Team1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Team2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MatchDate" Type="DateTime" Precision="0" />
+    <Property Name="Venue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SeriesId" Type="Int32" />
+    <Property Name="SeriesName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SeriesStartDate" Type="DateTime" Precision="0" />
+    <Property Name="SeriesEndDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="BcciSeries1" Relationship="Self.FK__BcciSerie__Serie__403A8C7D" FromRole="BcciSeries" ToRole="BcciSeries1" />
+    <NavigationProperty Name="BcciSery1" Relationship="Self.FK__BcciSerie__Serie__403A8C7D" FromRole="BcciSeries1" ToRole="BcciSeries" />
+  </EntityType>
+  <Association Name="FK__BcciSerie__Serie__403A8C7D">
+    <End Role="BcciSeries" Type="Self.BcciSery" Multiplicity="0..1" />
+    <End Role="BcciSeries1" Type="Self.BcciSery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BcciSeries">
+        <PropertyRef Name="MatchId" />
+      </Principal>
+      <Dependent Role="BcciSeries1">
+        <PropertyRef Name="SeriesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BCCIDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BcciSeries" EntityType="Self.BcciSery" />
+    <AssociationSet Name="FK__BcciSerie__Serie__403A8C7D" Association="Self.FK__BcciSerie__Serie__403A8C7D">
+      <End Role="BcciSeries" EntitySet="BcciSeries" />
+      <End Role="BcciSeries1" EntitySet="BcciSeries" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
